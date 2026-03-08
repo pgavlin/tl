@@ -1,7 +1,7 @@
 # tl
 
 A Go package and CLI tool for launching a command in a new terminal window,
-tab, or pane. Provdes a single, uniform API across major multiplexers and
+tab, or pane. Provides a single, uniform API across major multiplexers and
 terminal emulators.
 
 ## Supported environments
@@ -21,11 +21,17 @@ terminal emulators.
 ## CLI: `tl`
 
 ```
-tl [flags] -- <command> [args...]
+tl <subcommand> [flags] -- <command> [args...]
 
-  --in       window | tab | vsplit | hsplit   (default: tab)
-  --dir      working directory
-  --name     title for the new window/tab/pane
+Subcommands:
+  tab      Open a new tab (default)
+  vsplit   Open a vertical split pane
+  hsplit   Open a horizontal split pane
+  window   Open a new window
+
+Flags:
+  --dir    working directory
+  --name   title for the new window/tab/pane
 ```
 
 ### Examples
@@ -35,11 +41,13 @@ tl [flags] -- <command> [args...]
 tl -- vim .
 
 # Open test output in a vertical split
-tl --in vsplit -- go test -v ./...
+tl vsplit -- go test -v ./...
 
 # Tail a log in a horizontal pane in a specific directory
-tl --in hsplit --dir /var/log --name "app logs" -- tail -f app.log
+tl hsplit --dir /var/log --name "app logs" -- tail -f app.log
 
+# Generate shell completions
+tl completion bash
 ```
 
 ### Install
